@@ -2,20 +2,18 @@ set nocompatible
 filetype off
 set shortmess+=I
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin()
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'fatih/vim-go'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'SirVer/ultisnips'
-Plugin 'ervandew/supertab'
-Plugin 'tpope/vim-commentary'
-Plugin 'mustache/vim-mustache-handlebars'
+Plug 'fatih/vim-go'
+Plug 'Valloric/YouCompleteMe'
+Plug 'kien/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'SirVer/ultisnips'
+Plug 'ervandew/supertab'
+Plug 'tpope/vim-commentary'
+Plug 'mustache/vim-mustache-handlebars'
 
-call vundle#end()  
+call plug#end()  
 
 set clipboard=unnamed
 
