@@ -56,12 +56,9 @@ setopt CORRECT
 
 stty -ixon
 
-PATH="$HOME/.rbenv/bin:$PATH"
+# PATH="$HOME/.rbenv/bin:$PATH"
 export PATH=$PATH:$GOPATH/bin
-export PATH="$PATH:/Users/alex/Library/Python/2.7/bin"
-
-export POWERLINE_CONFIG_COMMAND="/Users/alex/Library/Python/2.7/bin/powerline-config"
-export POWERLINE_COMMAND="/Users/alex/Library/Python/2.7/bin/powerline"
+# export PATH="$PATH:/Users/alex/Library/Python/2.7/bin"
 
 # Autoload screen if we aren't in it.  (Thanks Fjord!)
 if [[ $TMUX = '' ]] then tmux; fi

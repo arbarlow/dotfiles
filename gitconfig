@@ -34,3 +34,5 @@
   name = Alex Barlow
   email = alexbarlowis@gmail.com
   username = arbarlow
+[core]
+	excludesfile = /Users/barlow/.gitignore_global
