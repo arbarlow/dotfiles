@@ -12,6 +12,10 @@ Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-commentary'
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'tpope/vim-cucumber'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-ragtag'
+Plug 'kylef/apiblueprint.vim'
 
 call plug#end()  
 
@@ -69,6 +73,7 @@ map <CR> o<Esc>
 " displayed.
 :nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 nnoremap <C-e> :NERDTreeToggle<CR>
+nmap <C-p> :pc<CR>
 
 colorscheme idleFingers
 
@@ -91,3 +96,5 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
