@@ -35,4 +35,4 @@
   email = alexbarlowis@gmail.com
   username = arbarlow
 [core]
-	excludesfile = /Users/barlow/.gitignore_global
+	excludesfile = /Users/alex/.gitignore_global

@@ -9,6 +9,7 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-commentary'
 Plug 'mustache/vim-mustache-handlebars'
@@ -16,6 +17,10 @@ Plug 'tpope/vim-cucumber'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-ragtag'
 Plug 'kylef/apiblueprint.vim'
+Plug 'cespare/vim-toml'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'Chiel92/vim-autoformat'
 
 call plug#end()  
 
@@ -87,6 +92,8 @@ let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
+au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
@@ -98,3 +105,8 @@ let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+
+" highligh jsx files in .js files§
+let g:jsx_ext_required = 0
+
+au BufWrite * :Autoformat
