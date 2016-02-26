@@ -20,7 +20,8 @@ Plug 'kylef/apiblueprint.vim'
 Plug 'cespare/vim-toml'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-Plug 'Chiel92/vim-autoformat'
+Plug 'millermedeiros/vim-esformatter'
+Plug 'maksimr/vim-jsbeautify'
 
 call plug#end()  
 
@@ -109,4 +110,10 @@ au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
 " highligh jsx files in .js files§
 let g:jsx_ext_required = 0
 
-au BufWrite * :Autoformat
+" ignore node modules etc
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+:command WQ wq
+:command Wq wq
+:command W w
+:command Q q
