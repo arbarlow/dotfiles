@@ -51,7 +51,7 @@ hi VisualNOS            guifg=#000000 guibg=fg
 hi WarningMsg           guifg=#D8D8D8 guibg=#ff6347
 hi WildMenu             guifg=#000000 guibg=#ffff00
 hi CursorLine           guibg=#27272a 
-hi ColorColumn          guibg=#27272a guifg=#27272a
+hi ColorColumn          guibg=#27272a
 hi StatusLine           guibg=#2c2c2f guifg=#888888
 hi VertSplit            guibg=#2c2c2f guifg=#2c2c2f
 

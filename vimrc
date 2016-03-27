@@ -11,7 +11,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'ervandew/supertab'
-Plug 'tpope/vim-commentary'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'tpope/vim-cucumber'
 Plug 'tpope/vim-surround'
@@ -22,6 +21,8 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'millermedeiros/vim-esformatter'
 Plug 'maksimr/vim-jsbeautify'
+Plug 'tpope/vim-commentary'
+Plug 'elubow/cql-vim'
 
 call plug#end()  
 
@@ -79,7 +80,11 @@ map <CR> o<Esc>
 " displayed.
 :nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 nnoremap <C-e> :NERDTreeToggle<CR>
+
+" Close close preview with ctrl + p
 nmap <C-p> :pc<CR>
+
+map <Leader><Leader> <plug>Commentary
 
 colorscheme idleFingers
 
@@ -90,10 +95,15 @@ let g:go_fmt_command = "goimports"
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
+let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
+let g:go_highlight_methods = 1
+
 au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -111,7 +121,7 @@ au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
 let g:jsx_ext_required = 0
 
 " ignore node modules etc
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+" let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
 :command WQ wq
 :command Wq wq
