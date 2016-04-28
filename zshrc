@@ -56,7 +56,7 @@ setopt CORRECT
 
 stty -ixon
 
-# PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/.rbenv/shims:$PATH"
 export PATH=$PATH:$GOPATH/bin
 export PATH="./node_modules/.bin:$PATH"
 

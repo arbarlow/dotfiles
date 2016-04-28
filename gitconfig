@@ -29,10 +29,14 @@
 [merge]
   # Include summaries of merged commits in newly created merge commit messages
   log = true
+	tool = opendiff
 
 [user]
   name = Alex Barlow
   email = alexbarlowis@gmail.com
   username = arbarlow
+	signingkey = F2AD302B
 [core]
 	excludesfile = /Users/alex/.gitignore_global
+[commit]
+	gpgsign = false
