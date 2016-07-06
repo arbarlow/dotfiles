@@ -39,7 +39,7 @@ hi MatchParen           guifg=#FFFFFF guibg=#666666
 hi ModeMsg              gui=NONE
 hi MoreMsg              guifg=#20b2aa
 hi NonText              guifg=#D8D8D8
-hi Normal               guibg=#2c2c2f guifg=#D8D8D8
+hi Normal               guibg=#3c3c3c guifg=#D8D8D8
 hi Question             guifg=#ff6347
 hi Search               guifg=#000000 guibg=#ffd700
 hi SpecialKey           guifg=#00ffff
@@ -52,8 +52,8 @@ hi WarningMsg           guifg=#D8D8D8 guibg=#ff6347
 hi WildMenu             guifg=#000000 guibg=#ffff00
 hi CursorLine           guibg=#27272a 
 hi ColorColumn          guibg=#27272a
-hi StatusLine           guibg=#2c2c2f guifg=#888888
-hi VertSplit            guibg=#2c2c2f guifg=#2c2c2f
+hi StatusLine           guibg=#3c3c3c guifg=#888888
+hi VertSplit            guibg=#3c3c3c guifg=#3c3c3c
 
 " Colors for syntax highlighting
 hi Comment              guifg=#BC9458
