@@ -77,9 +77,10 @@ bindkey "[C" forward-word
 eval "$(hub alias -s)"
 
 # The next line updates PATH for the Google Cloud SDK.
-source '/Users/barlow/code/google-cloud-sdk/path.zsh.inc'
+source "$HOME/code/google-cloud-sdk/path.zsh.inc"
 
 # The next line enables shell command completion for gcloud.
-source '/Users/barlow/code/google-cloud-sdk/completion.zsh.inc'
+source "$HOME/code/google-cloud-sdk/completion.zsh.inc"
+
 
 alias k="kubectl"
