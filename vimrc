@@ -23,6 +23,7 @@ Plug 'millermedeiros/vim-esformatter'
 Plug 'maksimr/vim-jsbeautify'
 Plug 'tpope/vim-commentary'
 Plug 'elubow/cql-vim'
+Plug 'AndrewRadev/splitjoin.vim'
 
 call plug#end()  
 

@@ -3,8 +3,7 @@ autoload -Uz colors; colors
 source ~/.aliases
 
 export GOPATH=~/code/go
-export GO=$GOPATH/bin
-export GOROOT=`go env GOROOT`
+export GOROOT=/usr/local/opt/go/libexec
 
 # Show stuff in prompt
 precmd() {
