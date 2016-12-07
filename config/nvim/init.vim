@@ -1,7 +1,10 @@
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'scrooloose/nerdtree'
-Plug 'othree/yajs.vim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'pangloss/vim-javascript'
+Plug 'mklabs/jscs.vim', { 'do': 'npm i jscs -g' }
 Plug 'mxw/vim-jsx'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
@@ -13,7 +16,6 @@ Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'fatih/vim-go'
 Plug 'majutsushi/tagbar'
-Plug 'ternjs/tern_for_vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'bronson/vim-trailing-whitespace'
 

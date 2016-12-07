@@ -13,8 +13,11 @@ alias t="make test"
 alias d="docker"
 alias drm="docker run --rm"
 alias dc="docker-compose"
-alias dcu="docker-compose up"
 alias dr="docker-compose run --rm"
+alias de="docker-compose exec"
+
+alias dgc="docker ps -a | grep 'weeks ago' | awk '{print $1}' | xargs docker rm"
+alias dgci="docker images | grep '<none>' | awk '{print $3}' | xargs docker rmi"
 
 # List all files colorized in long format, including dot files
 alias l="ls -1F"
