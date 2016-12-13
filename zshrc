@@ -2,7 +2,7 @@ autoload -Uz colors; colors
 
 source ~/.aliases
 
-export GOPATH=~/code/go
+export GOPATH=~/go
 export GOROOT=/usr/local/opt/go/libexec
 
 # Show stuff in prompt
@@ -19,8 +19,6 @@ precmd() {
 
   PS1="%n@%c"
   
-  PS1="${PS1}:%F{green}[$(rbenv version | sed -e 's/ .*//')]%{$reset_color%}"
-
   if git branch >& /dev/null; then
     PS1="${PS1}%F{yellow}[$(git branch --no-color | grep '^*' | cut -d ' ' -f 2-)]"
   fi
@@ -76,11 +74,15 @@ bindkey "[C" forward-word
 
 eval "$(hub alias -s)"
 
-# The next line updates PATH for the Google Cloud SDK.
-source "$HOME/code/google-cloud-sdk/path.zsh.inc"
-
-# The next line enables shell command completion for gcloud.
-source "$HOME/code/google-cloud-sdk/completion.zsh.inc"
-
 
 alias k="kubectl"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f /Users/alex/google-cloud-sdk/path.zsh.inc ]; then
+  source '/Users/alex/google-cloud-sdk/path.zsh.inc'
+fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f /Users/alex/google-cloud-sdk/completion.zsh.inc ]; then
+  source '/Users/alex/google-cloud-sdk/completion.zsh.inc'
+fi
