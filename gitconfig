@@ -37,6 +37,8 @@
   username = arbarlow
 	signingkey = F2AD302B
 [core]
-	excludesfile = /Users/alex/.gitignore_global
+	excludesfile = ~/.gitignore
 [commit]
 	gpgsign = false
+[http "https://gopkg.in"]
+	followRedirects = true

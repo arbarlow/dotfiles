@@ -1,23 +1,20 @@
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'scrooloose/nerdtree'
+Plug 'fatih/vim-go'
+Plug 'tpope/vim-commentary'
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'pangloss/vim-javascript'
-Plug 'mklabs/jscs.vim', { 'do': 'npm i jscs -g' }
-Plug 'mxw/vim-jsx'
-Plug 'tpope/vim-fugitive'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'kien/ctrlp.vim'
-Plug 'tpope/vim-commentary'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-Plug 'zchee/deoplete-go', { 'do': 'make'}
-Plug 'fatih/vim-go'
-Plug 'majutsushi/tagbar'
-Plug 'AndrewRadev/splitjoin.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'bronson/vim-trailing-whitespace'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-go', { 'do': 'make'}
+" Plug 'pangloss/vim-javascript'
+" Plug 'mklabs/jscs.vim', { 'do': 'npm i jscs -g' }
+" Plug 'mxw/vim-jsx'
+" Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+" Plug 'majutsushi/tagbar'
 
 call plug#end()
 
@@ -26,8 +23,9 @@ set nobackup
 set nowritebackup
 set noswapfile
 
-set clipboard=unnamed
+" set clipboard=unnamed
 
+" Becuase I have fat fingers
 :command WQ wq
 :command Wq wq
 :command W w
@@ -36,7 +34,6 @@ set clipboard=unnamed
 " Enable file type detection and do language-dependent indenting.
 filetype plugin indent off
 filetype plugin indent on
-
 set tabstop=2
 set shiftwidth=2
 set expandtab
@@ -46,8 +43,9 @@ set ignorecase
 " Highlight dynamically as pattern is typed
 set incsearch
 
-" Close close preview with ctrl + p
-nmap <C-p> :pc<CR>
+" Press Space to turn off highlighting and clear any message already
+" displayed.
+:nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
 " No startup message
 set shortmess+=I
@@ -61,21 +59,23 @@ colorscheme idlefingers
 set background=dark
 set number
 
-" Press Space to turn off highlighting and clear any message already
-" displayed.
-:nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+" Close close preview with ctrl + p
+nmap <C-p> :pc<CR>
 
-"Make enter create a new line and return out of insert mode
-map <S-Enter> O<Esc>
-map <CR> o<Esc>
+" "Make enter create a new line and return out of insert mode
+" map <S-Enter> O<Esc>
+" map <CR> o<Esc>
 
 " Nerdtree
 nnoremap <C-e> :NERDTreeToggle<CR>
-nmap <F6> :TagbarToggle<CR>
 
-" CtrlP
+" Tagbar
+" nmap <F6> :TagbarToggle<CR>
+
+" " CtrlP
 let g:ctrlp_map = '<Leader>t'
 let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " Go settings
 let g:go_fmt_command = "goimports"
@@ -87,41 +87,34 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_methods = 1
 
+au FileType go nmap <leader>r <Plug>(go-rename)
 au FileType go nmap <Leader>ds <Plug>(go-def-split)
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 
 au FileType go nmap <Leader>gd <Plug>(go-doc)
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <Leader>gt <Plug>(go-doc-tab)
 
-" Airline stuff
-let g:airline_powerline_fonts = 1
-let g:airline_theme='solarized'
+" Snippets
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
 
-" remove separators
-" remove unused modes
-let g:airline_enable_syntastic=0
-let g:airline_symbols.linenr = ''
-" empty third and fourth sections
-let g:airline_section_z = airline#section#create(['linenr', 'maxlinenr'])
+" " highligh jsx files in .js files§
+" let g:jsx_ext_required = 0
 
-let g:airline#extensions#default#layout = [
-      \	["a", "b", "c"],
-      \	["z", "error", "warning"]
-      \ ]
-
-" highligh jsx files in .js files§
-let g:jsx_ext_required = 0
-
-" ignore node modules etc
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-
-" Commenting out
+" " Commenting out
 map <Leader><Leader> <plug>Commentary
 
-" Deoplete
+" " Deoplete
 let g:deoplete#enable_at_startup = 1
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+

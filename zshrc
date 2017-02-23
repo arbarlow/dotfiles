@@ -18,7 +18,7 @@ precmd() {
   fi
 
   PS1="%n@%c"
-  
+
   if git branch >& /dev/null; then
     PS1="${PS1}%F{yellow}[$(git branch --no-color | grep '^*' | cut -d ' ' -f 2-)]"
   fi
@@ -29,7 +29,7 @@ precmd() {
 # Set default editor
 if [[ -x $(which vim) ]]
 then
-    export EDITOR="mvim -v"
+    export EDITOR="nvim"
     export USE_EDITOR=$EDITOR
     export VISUAL=$EDITOR
 fi
@@ -77,12 +77,10 @@ eval "$(hub alias -s)"
 
 alias k="kubectl"
 
+git config --global core.excludesfile '~/.gitignore'
+
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f /Users/alex/google-cloud-sdk/path.zsh.inc ]; then
-  source '/Users/alex/google-cloud-sdk/path.zsh.inc'
-fi
+if [ -f '/Users/alexb/code/gcloud/path.zsh.inc' ]; then source '/Users/alexb/code/gcloud/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f /Users/alex/google-cloud-sdk/completion.zsh.inc ]; then
-  source '/Users/alex/google-cloud-sdk/completion.zsh.inc'
-fi
+if [ -f '/Users/alexb/code/gcloud/completion.zsh.inc' ]; then source '/Users/alexb/code/gcloud/completion.zsh.inc'; fi
