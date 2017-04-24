@@ -20,6 +20,8 @@ alias de="docker-compose exec"
 
 alias drmc="docker ps -a | awk '{print $1}' | xargs docker rm"
 alias drmi="docker images |  awk '{print $3}' | xargs docker rmi"
+alias dgc="docker ps -a | grep 'weeks ago' | awk '{print $1}' | xargs docker rm"
+alias dgci="docker images | awk '{print $3}' | xargs docker rmi"
 
 alias gpp="find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin master \;"
 

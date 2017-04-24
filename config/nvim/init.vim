@@ -12,8 +12,8 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'zchee/deoplete-jedi'
 Plug 'buoto/gotests-vim'
+Plug 'jodosha/vim-godebug'
 Plug 'nvie/vim-flake8'
-Plug 'scrooloose/syntastic'
 " Plug 'pangloss/vim-javascript'
 " Plug 'mklabs/jscs.vim', { 'do': 'npm i jscs -g' }
 " Plug 'mxw/vim-jsx'
@@ -127,9 +127,3 @@ au BufNewFile,BufRead *.py
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_check_on_wq = 0
