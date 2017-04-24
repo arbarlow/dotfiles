@@ -84,3 +84,8 @@ if [ -f '/Users/alexb/code/gcloud/path.zsh.inc' ]; then source '/Users/alexb/cod
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/alexb/code/gcloud/completion.zsh.inc' ]; then source '/Users/alexb/code/gcloud/completion.zsh.inc'; fi
+
+bindkey -v
+bindkey '^R' history-incremental-search-backward
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

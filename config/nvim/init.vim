@@ -10,6 +10,10 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
+Plug 'zchee/deoplete-jedi'
+Plug 'buoto/gotests-vim'
+Plug 'nvie/vim-flake8'
+Plug 'scrooloose/syntastic'
 " Plug 'pangloss/vim-javascript'
 " Plug 'mklabs/jscs.vim', { 'do': 'npm i jscs -g' }
 " Plug 'mxw/vim-jsx'
@@ -34,9 +38,6 @@ set noswapfile
 " Enable file type detection and do language-dependent indenting.
 filetype plugin indent off
 filetype plugin indent on
-set tabstop=2
-set shiftwidth=2
-set expandtab
 
 " Ignore case of searches
 set ignorecase
@@ -118,3 +119,17 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_check_on_wq = 0

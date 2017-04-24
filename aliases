@@ -4,20 +4,24 @@ alias ..="cd .."
 alias c="cd ~/code"
 alias g="git"
 alias v="nvim"
-alias be="bundle exec"
-alias r="bundle exec rake"
-alias gr="go run"
-alias gg="go get"
+
 alias m="make"
 alias t="make test"
+
+alias be="bundle exec"
+alias r="bundle exec rake"
+
 alias d="docker"
 alias drm="docker run --rm"
+
 alias dc="docker-compose"
 alias dr="docker-compose run --rm"
 alias de="docker-compose exec"
 
-alias dgc="docker ps -a | grep 'weeks ago' | awk '{print $1}' | xargs docker rm"
-alias dgci="docker images | grep '<none>' | awk '{print $3}' | xargs docker rmi"
+alias drmc="docker ps -a | awk '{print $1}' | xargs docker rm"
+alias drmi="docker images |  awk '{print $3}' | xargs docker rmi"
+
+alias gpp="find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin master \;"
 
 # List all files colorized in long format, including dot files
 alias l="ls -1F"
@@ -61,11 +65,6 @@ function gz() {
 	cat "$1" | wc -c
 	echo "gzipped size (bytes): "
 	gzip -c "$1" | wc -c
-}
-
-# Gzip-enabled `curl`
-function gurl() {
-	curl -sH "Accept-Encoding: gzip" "$@" | gunzip
 }
 
 # All the dig info
