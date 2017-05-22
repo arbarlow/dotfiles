@@ -11,8 +11,10 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'zchee/deoplete-jedi'
 Plug 'buoto/gotests-vim'
-" Plug 'sbdchd/neoformat'
-" Plug 'chaoren/vim-wordmotion'
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+Plug 'google/vim-glaive'
+Plug 'hdima/python-syntax'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Plug 'pangloss/vim-javascript'
 " Plug 'mklabs/jscs.vim', { 'do': 'npm i jscs -g' }
@@ -126,3 +128,10 @@ au BufNewFile,BufRead *.py
     \ set fileformat=unix
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+augroup autoformat_settings
+  autocmd FileType python AutoFormatBuffer yapf
+  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+augroup END
+
+let python_highlight_all = 1

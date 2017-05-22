@@ -4,7 +4,9 @@
   # View the current working tree status using the short format
   s = status -s
   # Pull in remote changes for the current repository and all its submodules
-  p = !"git pull -r"
+  p = !"git pull"
+  # Fetch all the things
+  f = !"git fetch"
   # Push git push to master
   pm = !"git push origin master"
   # Clone a repository including all submodules

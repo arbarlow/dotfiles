@@ -83,9 +83,10 @@ git config --global core.excludesfile '~/.gitignore'
 if [ -f '~/code/gcloud/path.zsh.inc' ]; then source '~/code/gcloud/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 if [ -f '~/code/gcloud/completion.zsh.inc' ]; then source '~/code/gcloud/completion.zsh.inc'; fi
 
-bindkey -v
-bindkey '^R' history-incremental-search-backward
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
