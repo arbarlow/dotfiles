@@ -74,7 +74,6 @@ bindkey "[C" forward-word
 
 eval "$(hub alias -s)"
 
-
 alias k="kubectl"
 
 git config --global core.excludesfile '~/.gitignore'

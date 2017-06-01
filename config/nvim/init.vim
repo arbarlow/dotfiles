@@ -16,6 +16,7 @@ Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
 Plug 'hdima/python-syntax'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'christoomey/vim-tmux-navigator'
 " Plug 'pangloss/vim-javascript'
 " Plug 'mklabs/jscs.vim', { 'do': 'npm i jscs -g' }
 " Plug 'mxw/vim-jsx'
@@ -135,3 +136,11 @@ augroup autoformat_settings
 augroup END
 
 let python_highlight_all = 1
+
+
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <a-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <a-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <a-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <a-l> :TmuxNavigateRight<cr>
+
