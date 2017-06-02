@@ -79,10 +79,10 @@ alias k="kubectl"
 git config --global core.excludesfile '~/.gitignore'
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '~/code/gcloud/path.zsh.inc' ]; then source '~/code/gcloud/path.zsh.inc'; fi
+if [ -f ~/code/gcloud/path.zsh.inc ]; then source ~/code/gcloud/path.zsh.inc; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '~/code/gcloud/completion.zsh.inc' ]; then source '~/code/gcloud/completion.zsh.inc'; fi
+if [ -f ~/code/gcloud/completion.zsh.inc ]; then source ~/code/gcloud/completion.zsh.inc; fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
