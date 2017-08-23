@@ -3,6 +3,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'fatih/vim-go'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -10,19 +11,18 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'zchee/deoplete-jedi'
+Plug 'steelsojka/deoplete-flow'
 Plug 'buoto/gotests-vim'
-Plug 'google/vim-maktaba'
-Plug 'google/vim-codefmt'
-Plug 'google/vim-glaive'
 Plug 'hdima/python-syntax'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'christoomey/vim-tmux-navigator'
-" Plug 'pangloss/vim-javascript'
-" Plug 'mklabs/jscs.vim', { 'do': 'npm i jscs -g' }
-" Plug 'mxw/vim-jsx'
-" Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-" Plug 'majutsushi/tagbar'
-
+Plug 'pangloss/vim-javascript'
+Plug 'sbdchd/neoformat'
+Plug 'mxw/vim-jsx'
+Plug 'majutsushi/tagbar'
+Plug 'jparise/vim-graphql'
+Plug 'mattn/emmet-vim'
+Plug 'tell-k/vim-autoflake'
 call plug#end()
 
 let mapleader=" "
@@ -128,19 +128,30 @@ au BufNewFile,BufRead *.py
     \ set autoindent |
     \ set fileformat=unix
 
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-
-augroup autoformat_settings
-  autocmd FileType python AutoFormatBuffer yapf
-  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
-augroup END
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+filetype plugin indent on
 
 let python_highlight_all = 1
 
+" let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
+" nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+" nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+" nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 
-let g:tmux_navigator_no_mappings = 1
-nnoremap <silent> <a-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <a-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <a-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <a-l> :TmuxNavigateRight<cr>
+let g:neoformat_enabled_javascript = ['prettier']
+let g:neoformat_enabled_css = ['prettier']
+let g:neoformat_enabled_html = ['prettier']
+let g:neoformat_enabled_python = ['isort', 'yapf']
+let g:neoformat_run_all_formatters = 1
+let g:neoformat_only_msg_on_error = 1
+autocmd BufWritePre *.js Neoformat
+autocmd BufWritePre *.html Neoformat
+autocmd BufWritePre *.css Neoformat
+autocmd BufWritePre *.py Neoformat
 
+let g:autoflake_remove_all_unused_imports=1
+let g:autoflake_remove_unused_variables=1
+let g:autoflake_disable_show_diff=1

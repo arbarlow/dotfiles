@@ -5,6 +5,8 @@ source ~/.aliases
 export GOPATH=~/go
 export GOROOT=/usr/local/opt/go/libexec
 
+source ~/.kubectl.zsh
+
 # Show stuff in prompt
 precmd() {
   exit_status=$?
@@ -22,6 +24,10 @@ precmd() {
   if git branch >& /dev/null; then
     PS1="${PS1}%F{yellow}[$(git branch --no-color | grep '^*' | cut -d ' ' -f 2-)]"
   fi
+
+  K8S=$(kubectl config current-context)
+
+  # PS1="${PS1}%F{magenta}(${ZSH_KUBECTL_PROMPT})"
 
   PS1="${PS1}%{$reset_color%}: %{$reset_color%}"
 }
@@ -89,3 +95,11 @@ if [ -f ~/code/gcloud/completion.zsh.inc ]; then source ~/code/gcloud/completion
 autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
+
+source <(kubectl completion zsh)
+
+bindkey '^p' clear-screen
+
+export PATH=$PATH:/Users/alexb/bin
+
+source '/Users/alexb/code/azure/az.completion'
