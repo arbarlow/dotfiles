@@ -23,6 +23,7 @@ Plug 'majutsushi/tagbar'
 Plug 'jparise/vim-graphql'
 Plug 'mattn/emmet-vim'
 Plug 'tell-k/vim-autoflake'
+Plug 'martinda/Jenkinsfile-vim-syntax'
 call plug#end()
 
 let mapleader=" "
