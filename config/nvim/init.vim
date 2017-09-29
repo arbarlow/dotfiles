@@ -24,6 +24,7 @@ Plug 'jparise/vim-graphql'
 Plug 'mattn/emmet-vim'
 Plug 'tell-k/vim-autoflake'
 Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'hail2u/vim-css3-syntax'
 call plug#end()
 
 let mapleader=" "
