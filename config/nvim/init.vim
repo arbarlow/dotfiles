@@ -25,6 +25,7 @@ Plug 'mattn/emmet-vim'
 Plug 'tell-k/vim-autoflake'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'hail2u/vim-css3-syntax'
+Plug 'leafgarland/typescript-vim'
 call plug#end()
 
 let mapleader=" "
@@ -33,6 +34,7 @@ let mapleader=" "
 set nobackup
 set nowritebackup
 set noswapfile
+set mouse=a
 
 set clipboard=unnamed
 

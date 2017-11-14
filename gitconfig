@@ -35,12 +35,14 @@
 
 [user]
   name = Alex Barlow
-  email = alexbarlowis@gmail.com
+  email = a@alexb.cc
   username = arbarlow
-	signingkey = F2AD302B
+	signingkey = 67A2BDC3D7E698F0
 [core]
-	excludesfile = ~/.gitignore
+	excludesfile = /Users/alexb/.gitignore_global
 [commit]
-	gpgsign = false
+	gpgsign = true
 [http "https://gopkg.in"]
 	followRedirects = true
+[gpg]
+	program = gpg

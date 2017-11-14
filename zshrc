@@ -101,5 +101,6 @@ source <(kubectl completion zsh)
 bindkey '^p' clear-screen
 
 export PATH=$PATH:/Users/alexb/bin
+export GPG_TTY=$(tty)
 
-source '/Users/alexb/code/azure/az.completion'
+git config --global core.excludesfile ~/.gitignore_global
