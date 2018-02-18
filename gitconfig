@@ -37,9 +37,9 @@
   name = Alex Barlow
   email = a@alexb.cc
   username = arbarlow
-	signingkey = 67A2BDC3D7E698F0
+	signingkey = 3D3E3736720C35E923E6629F9E20415F56850E95
 [core]
-	excludesfile = /Users/alexb/.gitignore_global
+	excludesfile = /Users/alex/.gitignore_global
 [commit]
 	gpgsign = true
 [http "https://gopkg.in"]

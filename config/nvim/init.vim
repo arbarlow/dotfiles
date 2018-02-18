@@ -8,22 +8,15 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-go', { 'do': 'make'}
-Plug 'zchee/deoplete-jedi'
-Plug 'steelsojka/deoplete-flow'
+Plug 'roxma/nvim-completion-manager'
 Plug 'buoto/gotests-vim'
-Plug 'hdima/python-syntax'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'pangloss/vim-javascript'
 Plug 'sbdchd/neoformat'
 Plug 'mxw/vim-jsx'
-Plug 'majutsushi/tagbar'
 Plug 'jparise/vim-graphql'
 Plug 'mattn/emmet-vim'
-Plug 'tell-k/vim-autoflake'
-Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'leafgarland/typescript-vim'
 call plug#end()

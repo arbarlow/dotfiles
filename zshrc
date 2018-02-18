@@ -3,7 +3,6 @@ autoload -Uz colors; colors
 source ~/.aliases
 
 export GOPATH=~/go
-export GOROOT=/usr/local/opt/go/libexec
 
 source ~/.kubectl.zsh
 
