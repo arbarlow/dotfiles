@@ -19,6 +19,9 @@ Plug 'jparise/vim-graphql'
 Plug 'mattn/emmet-vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'leafgarland/typescript-vim'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'raimondi/delimitmate'
+Plug 'w0rp/ale'
 call plug#end()
 
 let mapleader=" "
@@ -28,6 +31,7 @@ set nobackup
 set nowritebackup
 set noswapfile
 set mouse=a
+set ttyfast
 
 set clipboard=unnamed
 

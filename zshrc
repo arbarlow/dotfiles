@@ -103,3 +103,8 @@ export PATH=$PATH:/Users/alexb/bin
 export GPG_TTY=$(tty)
 
 git config --global core.excludesfile ~/.gitignore_global
+
+export PATH="$HOME/.yarn/bin:$PATH"
+export PATH="$PATH:$HOME/code/istio/bin"
+
+[[ -s "/Users/alexb/.gvm/scripts/gvm" ]] && source "/Users/alexb/.gvm/scripts/gvm"
