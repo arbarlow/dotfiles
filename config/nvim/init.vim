@@ -5,14 +5,17 @@ Plug 'fatih/vim-go'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'bronson/vim-trailing-whitespace'
-Plug 'roxma/nvim-completion-manager'
+Plug 'Valloric/YouCompleteMe'
 Plug 'buoto/gotests-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'sbdchd/neoformat'
 Plug 'mxw/vim-jsx'
 Plug 'jparise/vim-graphql'
@@ -22,6 +25,9 @@ Plug 'leafgarland/typescript-vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'raimondi/delimitmate'
 Plug 'w0rp/ale'
+Plug 'Yggdroot/indentLine'
+Plug 'styled-components/vim-styled-components'
+
 call plug#end()
 
 let mapleader=" "
@@ -110,10 +116,15 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 " " Commenting out
 map <Leader><Leader> <plug>Commentary
 
-" " Deoplete
-let g:deoplete#enable_at_startup = 1
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 noremap <Up> <NOP>
 noremap <Down> <NOP>
@@ -136,11 +147,7 @@ filetype plugin indent on
 
 let python_highlight_all = 1
 
-" let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
-" nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
-" nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
-" nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 
 let g:neoformat_enabled_javascript = ['prettier']
 let g:neoformat_enabled_css = ['prettier']
@@ -149,10 +156,18 @@ let g:neoformat_enabled_python = ['isort', 'yapf']
 let g:neoformat_run_all_formatters = 1
 let g:neoformat_only_msg_on_error = 1
 autocmd BufWritePre *.js Neoformat
+autocmd BufWritePre *.ts Neoformat
+autocmd BufWritePre *.tsx Neoformat
 autocmd BufWritePre *.html Neoformat
 autocmd BufWritePre *.css Neoformat
 autocmd BufWritePre *.py Neoformat
+" autocmd BufWritePre *.json Neoformat
+
+autocmd FileType yaml setl indentkeys-=<:>
 
 let g:autoflake_remove_all_unused_imports=1
 let g:autoflake_remove_unused_variables=1
 let g:autoflake_disable_show_diff=1
+
+let g:ale_linters = {'jsx': ['eslint']}
+let g:javascript_plugin_flow = 1
