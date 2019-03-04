@@ -37,7 +37,8 @@
   name = Alex Barlow
   email = a@alexb.cc
   username = arbarlow
-	signingkey = 3D3E3736720C35E923E6629F9E20415F56850E95
+  signingkey = 69E15C0A4436487319DD79B03C8A851C90770AE5
+
 [core]
 	excludesfile = /Users/alex/.gitignore_global
 [commit]
