@@ -9,13 +9,15 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'Valloric/YouCompleteMe'
-Plug 'buoto/gotests-vim'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
 Plug 'sbdchd/neoformat'
 Plug 'mxw/vim-jsx'
 Plug 'jparise/vim-graphql'
@@ -25,7 +27,6 @@ Plug 'leafgarland/typescript-vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'raimondi/delimitmate'
 Plug 'w0rp/ale'
-Plug 'Yggdroot/indentLine'
 Plug 'styled-components/vim-styled-components'
 
 call plug#end()
@@ -35,6 +36,7 @@ let mapleader=" "
 " Tell vim to not make loads of crap files
 set nobackup
 set nowritebackup
+
 set noswapfile
 set mouse=a
 set ttyfast
@@ -169,5 +171,16 @@ let g:autoflake_remove_all_unused_imports=1
 let g:autoflake_remove_unused_variables=1
 let g:autoflake_disable_show_diff=1
 
-let g:ale_linters = {'jsx': ['eslint']}
+let g:ale_linters = {'jsx': ['eslint'], 'go': ['golangci-lint', 'gofmt', 'gobuild']}
+let g:ale_linters_ignore = {'typescript': ['tslint', 'eslint']}
+let g:ale_go_golangci_lint_options = "--enable-all -D typecheck"
 let g:javascript_plugin_flow = 1
+
+let g:deoplete#enable_at_startup = 1
+let g:LanguageClient_rootMarkers = {
+        \ 'go': ['.git', 'go.mod'],
+        \ }
+
+let g:LanguageClient_serverCommands = {
+    \ 'go': ['bingo'],
+    \ }

@@ -37,15 +37,12 @@
   name = Alex Barlow
   email = a@alexb.cc
   username = arbarlow
-	signingkey = 3D3E3736720C35E923E6629F9E20415F56850E95
 [core]
-	excludesfile = /Users/alex/.gitignore_global
-[commit]
-	gpgsign = true
+	excludesfile = /Users/alexb/.gitignore_global
 [http "https://gopkg.in"]
 	followRedirects = true
 [gpg]
-	program = gpg
+	program = gpg2,
 
 [url "ssh://git@github.com/echo-health/"]
 insteadOf = https://github.com/echo-health/
