@@ -3,6 +3,7 @@ autoload -Uz colors; colors
 source ~/.aliases
 
 export GOPATH=~/go
+export GO111MODULE=on
 
 source ~/.kubectl.zsh
 
