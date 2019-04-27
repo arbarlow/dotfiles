@@ -1,11 +1,21 @@
 autoload -Uz colors; colors
 
 source ~/.aliases
-
-export GOPATH=~/go
-export GO111MODULE=on
-
 source ~/.kubectl.zsh
+
+# AGENT_SOCK=$(gpgconf --list-dirs | grep agent-socket | cut -d : -f 2)
+
+# if [[ ! -S $AGENT_SOCK ]]; then
+#   gpg-agent --daemon --use-standard-socket &>/dev/null
+# fi
+# export GPG_TTY=$TTY
+
+# Set SSH to use gpg-agent if it's enabled
+# GNUPGCONFIG="${GNUPGHOME:-"$HOME/.gnupg"}/gpg-agent.conf"
+# if [[ -r $GNUPGCONFIG ]] && command grep -q enable-ssh-support "$GNUPGCONFIG"; then
+#   export SSH_AUTH_SOCK="$AGENT_SOCK.ssh"
+#   unset SSH_AGENT_PID
+# fi
 
 # Show stuff in prompt
 precmd() {
@@ -60,9 +70,10 @@ setopt CORRECT
 
 stty -ixon
 
-export PATH="$HOME/.rbenv/shims:$PATH"
 export PATH=$PATH:$GOPATH/bin
+export PATH="$HOME/.rbenv/shims:$PATH"
 export PATH="./node_modules/.bin:$PATH"
+export PATH="$HOME/bin:$PATH"
 
 # Autoload screen if we aren't in it.  (Thanks Fjord!)
 if [[ $TMUX = '' ]] then tmux; fi
@@ -75,14 +86,12 @@ compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' list-colors "=(#b) #([0-9]#)*=36=31"
 
-bindkey "[D" backward-word
-bindkey "[C" forward-word
-
 eval "$(hub alias -s)"
 
 alias k="kubectl"
 
 git config --global core.excludesfile '~/.gitignore'
+git config --global core.excludesfile ~/.gitignore_global
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f ~/code/gcloud/path.zsh.inc ]; then source ~/code/gcloud/path.zsh.inc; fi
@@ -99,13 +108,3 @@ bindkey "^X^E" edit-command-line
 source <(kubectl completion zsh)
 
 bindkey '^p' clear-screen
-
-export PATH=$PATH:/Users/alexb/bin
-export GPG_TTY=$(tty)
-
-git config --global core.excludesfile ~/.gitignore_global
-
-export PATH="$HOME/.yarn/bin:$PATH"
-export PATH="$PATH:$HOME/code/istio/bin"
-
-[[ -s "/Users/alexb/.gvm/scripts/gvm" ]] && source "/Users/alexb/.gvm/scripts/gvm"

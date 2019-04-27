@@ -28,6 +28,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'raimondi/delimitmate'
 Plug 'w0rp/ale'
 Plug 'styled-components/vim-styled-components'
+Plug 'hdima/python-syntax'
 
 call plug#end()
 
@@ -92,7 +93,7 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " Go settings
-let g:go_fmt_command = "goimports"
+let g:go_fmt_autosave = 0
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
@@ -101,19 +102,10 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_methods = 1
 
-au FileType go nmap <leader>r <Plug>(go-rename)
-au FileType go nmap <Leader>ds <Plug>(go-def-split)
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-au FileType go nmap <Leader>dt <Plug>(go-def-tab)
-au FileType go nmap <Leader>gd <Plug>(go-doc)
-
 " Snippets
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
-" " highligh jsx files in .js files§
-" let g:jsx_ext_required = 0
 
 " " Commenting out
 map <Leader><Leader> <plug>Commentary
@@ -163,7 +155,6 @@ autocmd BufWritePre *.tsx Neoformat
 autocmd BufWritePre *.html Neoformat
 autocmd BufWritePre *.css Neoformat
 autocmd BufWritePre *.py Neoformat
-" autocmd BufWritePre *.json Neoformat
 
 autocmd FileType yaml setl indentkeys-=<:>
 
@@ -171,9 +162,10 @@ let g:autoflake_remove_all_unused_imports=1
 let g:autoflake_remove_unused_variables=1
 let g:autoflake_disable_show_diff=1
 
-let g:ale_linters = {'jsx': ['eslint'], 'go': ['golangci-lint', 'gofmt', 'gobuild']}
+let g:ale_linters = {'jsx': ['prettier'], 'js': ['prettier'], 'go': ['golangci-lint']}
 let g:ale_linters_ignore = {'typescript': ['tslint', 'eslint']}
 let g:ale_go_golangci_lint_options = "--enable-all -D typecheck"
+let g:ale_go_langserver_executable = 'gopls'
 let g:javascript_plugin_flow = 1
 
 let g:deoplete#enable_at_startup = 1
@@ -182,5 +174,8 @@ let g:LanguageClient_rootMarkers = {
         \ }
 
 let g:LanguageClient_serverCommands = {
-    \ 'go': ['bingo'],
-    \ }
+       \ 'go': ['gopls']
+       \ }
+
+let g:go_def_mode='gopls'
+autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
