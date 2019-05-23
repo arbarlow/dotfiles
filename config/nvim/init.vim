@@ -101,6 +101,8 @@ let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_methods = 1
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
 
 " Snippets
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -155,6 +157,7 @@ autocmd BufWritePre *.tsx Neoformat
 autocmd BufWritePre *.html Neoformat
 autocmd BufWritePre *.css Neoformat
 autocmd BufWritePre *.py Neoformat
+autocmd BufWritePre *.go Neoformat
 
 autocmd FileType yaml setl indentkeys-=<:>
 
@@ -164,7 +167,7 @@ let g:autoflake_disable_show_diff=1
 
 let g:ale_linters = {'jsx': ['prettier'], 'js': ['prettier'], 'go': ['golangci-lint']}
 let g:ale_linters_ignore = {'typescript': ['tslint', 'eslint']}
-let g:ale_go_golangci_lint_options = "--enable-all -D typecheck"
+let g:ale_go_golangci_lint_options = "-E missspell"
 let g:ale_go_langserver_executable = 'gopls'
 let g:javascript_plugin_flow = 1
 
@@ -177,5 +180,3 @@ let g:LanguageClient_serverCommands = {
        \ 'go': ['gopls']
        \ }
 
-let g:go_def_mode='gopls'
-autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()

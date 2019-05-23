@@ -1,21 +1,6 @@
 autoload -Uz colors; colors
-
 source ~/.aliases
-source ~/.kubectl.zsh
 
-# AGENT_SOCK=$(gpgconf --list-dirs | grep agent-socket | cut -d : -f 2)
-
-# if [[ ! -S $AGENT_SOCK ]]; then
-#   gpg-agent --daemon --use-standard-socket &>/dev/null
-# fi
-# export GPG_TTY=$TTY
-
-# Set SSH to use gpg-agent if it's enabled
-# GNUPGCONFIG="${GNUPGHOME:-"$HOME/.gnupg"}/gpg-agent.conf"
-# if [[ -r $GNUPGCONFIG ]] && command grep -q enable-ssh-support "$GNUPGCONFIG"; then
-#   export SSH_AUTH_SOCK="$AGENT_SOCK.ssh"
-#   unset SSH_AGENT_PID
-# fi
 
 # Show stuff in prompt
 precmd() {
@@ -34,10 +19,6 @@ precmd() {
   if git branch >& /dev/null; then
     PS1="${PS1}%F{yellow}[$(git branch --no-color | grep '^*' | cut -d ' ' -f 2-)]"
   fi
-
-  K8S=$(kubectl config current-context)
-
-  # PS1="${PS1}%F{magenta}(${ZSH_KUBECTL_PROMPT})"
 
   PS1="${PS1}%{$reset_color%}: %{$reset_color%}"
 }
@@ -70,7 +51,7 @@ setopt CORRECT
 
 stty -ixon
 
-export PATH=$PATH:$GOPATH/bin
+export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.rbenv/shims:$PATH"
 export PATH="./node_modules/.bin:$PATH"
 export PATH="$HOME/bin:$PATH"
@@ -80,8 +61,12 @@ if [[ $TMUX = '' ]] then tmux; fi
 
 fpath=(~/.completions $fpath)
 export fpath
-autoload -U compinit
-compinit
+
+autoload -Uz compinit
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' list-colors "=(#b) #([0-9]#)*=36=31"
@@ -94,17 +79,15 @@ git config --global core.excludesfile '~/.gitignore'
 git config --global core.excludesfile ~/.gitignore_global
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f ~/code/gcloud/path.zsh.inc ]; then source ~/code/gcloud/path.zsh.inc; fi
+if [ -f ~/code/google-cloud-sdk/path.zsh.inc ]; then source ~/code/google-cloud-sdk/path.zsh.inc; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f ~/code/gcloud/completion.zsh.inc ]; then source ~/code/gcloud/completion.zsh.inc; fi
+if [ -f ~/code/google-cloud-sdk/completion.zsh.inc ]; then source ~/code/google-cloud-sdk/completion.zsh.inc; fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
-
-source <(kubectl completion zsh)
 
 bindkey '^p' clear-screen
