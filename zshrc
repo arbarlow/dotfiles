@@ -55,6 +55,7 @@ export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.rbenv/shims:$PATH"
 export PATH="./node_modules/.bin:$PATH"
 export PATH="$HOME/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
 
 # Autoload screen if we aren't in it.  (Thanks Fjord!)
 if [[ $TMUX = '' ]] then tmux; fi
@@ -91,3 +92,13 @@ zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
 bindkey '^p' clear-screen
+
+alias python=/usr/local/bin/python3
+alias pip=/usr/local/bin/pip3
+
+# Added by serverless binary installer
+export PATH="$HOME/.serverless/bin:$PATH"
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true

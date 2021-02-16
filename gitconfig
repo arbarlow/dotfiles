@@ -8,7 +8,7 @@
   # Fetch all the things
   f = !"git fetch"
   # Push git push to master
-  pm = !"git push origin master"
+  pm = !"git push origin main"
   # Clone a repository including all submodules
   c = clone --recursive
 
