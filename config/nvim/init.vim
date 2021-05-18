@@ -5,9 +5,8 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -21,31 +20,46 @@ Plug 'hdima/python-syntax'
 Plug 'mattn/emmet-vim'
 Plug 'hail2u/vim-css3-syntax'
 
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
+Plug 'yuezk/vim-js'
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
-Plug 'jparise/vim-graphql'
 
+Plug 'jparise/vim-graphql'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
 " Coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+Plug 'justinmk/vim-sneak'
+
 call plug#end()
+
+let g:sneak#label = 1
+let g:sneak#use_ic_scs = 1
 
 let g:coc_global_extensions = [
   \ 'coc-go',
+  \ 'coc-rls',
   \ 'coc-tsserver',
+  \ 'coc-css',
   \ 'coc-prettier',
-  \ 'coc-eslint'
+  \ 'coc-eslint',
+  \ 'coc-css',
+	\ 'coc-tailwindcss',
+	\ 'coc-styled-components',
+	\ 'coc-snippets',
+	\ 'coc-pairs',
+	\ 'coc-emmet',
   \ ]
 
 " Force vim to syntax refresh on tsx files
-autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
-autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
-autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+" autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+" autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+" autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 
 let mapleader=" "
+
+set number relativenumber
 
 " Tell vim to not make loads of crap files
 set nobackup
@@ -97,7 +111,6 @@ set termguicolors
 syntax enable
 colorscheme idlefingers
 set background=dark
-set number
 highlight SignColumn guibg=background
 
 " Close close preview with ctrl + p
@@ -110,12 +123,26 @@ map <CR> o<Esc>
 " Nerdtree
 nnoremap <C-e> :NERDTreeToggle<CR>
 
-nmap <Leader>t :FZF<CR>
-
-" CtrlP
-let g:ctrlp_map = '<Leader>t'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+nmap <Leader>t :Files<CR>
+nmap <Leader>r :Rg<CR>
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
+"
+" Customize fzf colors to match your color scheme
+" - fzf#wrap translates this to a set of `--color` options
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
 " Go settings
 let g:go_highlight_functions = 1
