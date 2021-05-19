@@ -21,7 +21,8 @@ Plug 'mattn/emmet-vim'
 Plug 'hail2u/vim-css3-syntax'
 
 Plug 'yuezk/vim-js'
-Plug 'HerringtonDarkholme/yats.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
 
 Plug 'jparise/vim-graphql'
@@ -53,9 +54,9 @@ let g:coc_global_extensions = [
   \ ]
 
 " Force vim to syntax refresh on tsx files
-" autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
-" autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
-" autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 
 let mapleader=" "
 
