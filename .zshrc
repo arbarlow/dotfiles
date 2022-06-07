@@ -24,4 +24,4 @@ bindkey '^p' clear-screen
 if [[ $TMUX = '' ]] then tmux; fi
 
 export PATH=$PATH:~/go/bin
-export PATH=$PATH:~/cargo/bin
+export PATH=$PATH:~/.cargo/bin

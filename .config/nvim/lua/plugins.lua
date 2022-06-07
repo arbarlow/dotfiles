@@ -66,6 +66,24 @@ return require("packer").startup(function(use)
 	use("windwp/nvim-autopairs")
 
 	use("simrat39/rust-tools.nvim")
+	use("jose-elias-alvarez/nvim-lsp-ts-utils")
+
+	use("mfussenegger/nvim-dap")
+	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+	use("theHamsta/nvim-dap-virtual-text")
+	use("folke/which-key.nvim")
+
+	use({
+		"pwntester/octo.nvim",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+			"kyazdani42/nvim-web-devicons",
+		},
+		config = function()
+			require("octo").setup()
+		end,
+	})
 
 	if PackerBootstrap then
 		require("packer").sync()

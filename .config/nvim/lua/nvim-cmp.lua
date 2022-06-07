@@ -1,7 +1,7 @@
 local cmp = require("cmp")
 local ok, lspkind = pcall(require, "lspkind")
 if not ok then
-  return
+	return
 end
 
 lspkind.init()
@@ -14,8 +14,8 @@ cmp.setup({
 		end,
 	},
 	mapping = {
-		["<C-n>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
-    ["<C-p>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
+		["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+		["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
 		["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
 		["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
 		["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
@@ -29,37 +29,27 @@ cmp.setup({
 		["<CR>"] = cmp.mapping.confirm({ select = true }),
 	},
 	sources = cmp.config.sources({
-		{ name = "luasnip" }, -- For vsnip users.
+		{ name = "luasnip" },
 		{ name = "nvim_lsp" },
 		{ name = "buffer" },
 	}),
 	formatting = {
-    -- Youtube: How to set up nice formatting for your sources.
-    format = lspkind.cmp_format {
-      with_text = true,
-      menu = {
-        buffer = "[buf]",
-        nvim_lsp = "[LSP]",
-        nvim_lua = "[api]",
-        path = "[path]",
-        luasnip = "[snip]",
-      },
-    },
-  },
-	  sorting = {
-    -- TODO: Would be cool to add stuff like "See variable names before method names" in rust, or something like that.
-    -- comparators = {
-    --   cmp.config.compare.offset,
-    --   cmp.config.compare.exact,
-    --   cmp.config.compare.score,
-
-
-    --   cmp.config.compare.kind,
-    --   cmp.config.compare.sort_text,
-    --   cmp.config.compare.length,
-    --   cmp.config.compare.order,
-    -- },
-  },
+		-- Youtube: How to set up nice formatting for your sources.
+		format = lspkind.cmp_format({
+			with_text = true,
+			menu = {
+				buffer = "[buf]",
+				nvim_lsp = "[LSP]",
+				nvim_lua = "[api]",
+				path = "[path]",
+				luasnip = "[snip]",
+			},
+		}),
+	},
+	completion = {
+		completeopt = "menu,menuone,noinsert",
+	},
+	preselect = cmp.PreselectMode.None,
 })
 
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")

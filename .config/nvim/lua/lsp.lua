@@ -1,7 +1,8 @@
 vim.cmd([[
-autocmd BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 10000)
-autocmd BufWritePre *.ts,*.tsx lua vim.lsp.buf.execute_command({command = "_typescript.organizeImports", arguments = {vim.fn.expand("%:p")}})
-]])
+"" Always run prettier last
+autocmd BufWritePre * lua vim.lsp.buf.formatting_seq_sync(nil, 10000, { "null_ls" })
+" autocmd BufWritePre *.ts,*.tsx lua vim.lsp.buf.execute_command({command = "_typescript.organizeImports", arguments = {vim.fn.expand("%:p")}})
+" ]])
 
 local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...)
@@ -31,7 +32,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = { "*.go" },
 	callback = function()
 		local params = vim.lsp.util.make_range_params(nil, vim.lsp.util._get_offset_encoding())
-		params.context = {only = {"source.organizeImports"}}
+		params.context = { only = { "source.organizeImports" } }
 
 		local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 3000)
 		for _, res in pairs(result or {}) do
@@ -51,8 +52,12 @@ local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protoco
 require("null-ls").setup({
 	sources = {
 		require("null-ls").builtins.formatting.stylua,
-		require("null-ls").builtins.formatting.prettier,
-		require("null-ls").builtins.completion.spell,
+		require("null-ls").builtins.diagnostics.actionlint,
+		require("null-ls").builtins.diagnostics.buf,
+		require("null-ls").builtins.formatting.eslint_d,
+		require("null-ls").builtins.formatting.prettierd,
+		require("null-ls").builtins.diagnostics.misspell,
+		require("null-ls").builtins.diagnostics.alex,
 	},
 })
 
@@ -60,21 +65,92 @@ require("lspconfig").eslint.setup({
 	capabilities = capabilities,
 	on_attach = function(client, b)
 		on_attach(client, b)
-		-- this is handled by null-ls and prettier
 		client.resolved_capabilities.document_formatting = false
 	end,
+	settings = {
+		rulesCustomizations = {
+			{
+				rule = "prettier/prettier",
+				severity = "off",
+			},
+		},
+	},
 })
 
 require("lspconfig").tsserver.setup({
 	capabilities = capabilities,
-	on_attach = function(client, b)
-		on_attach(client, b)
-		-- this is handled by null-ls and prettier
-		client.resolved_capabilities.document_formatting = false
-	end,
 	settings = {
 		disableAutomaticTypingAcquisition = true,
 	},
+
+	--
+	on_attach = function(client, bufnr)
+		on_attach(client, bufnr)
+		local ts_utils = require("nvim-lsp-ts-utils")
+
+		-- defaults
+		ts_utils.setup({
+			debug = false,
+			disable_commands = false,
+			enable_import_on_completion = true,
+
+			-- import all
+			import_all_timeout = 5000, -- ms
+			-- lower numbers = higher priority
+			import_all_priorities = {
+				same_file = 1, -- add to existing import statement
+				local_files = 2, -- git files or files with relative path markers
+				buffer_content = 3, -- loaded buffer content
+				buffers = 4, -- loaded buffer names
+			},
+			import_all_scan_buffers = 100,
+			import_all_select_source = false,
+			-- if false will avoid organizing imports
+			always_organize_imports = true,
+
+			-- filter diagnostics
+			filter_out_diagnostics_by_severity = {},
+			filter_out_diagnostics_by_code = {},
+
+			-- formatting
+			enable_formatting = false,
+
+			-- inlay hints
+			auto_inlay_hints = true,
+			inlay_hints_highlight = "Comment",
+			inlay_hints_priority = 200, -- priority of the hint extmarks
+			inlay_hints_throttle = 150, -- throttle the inlay hint request
+			inlay_hints_format = { -- format options for individual hint kind
+				Type = {},
+				Parameter = {},
+				Enum = {},
+				-- Example format customization for `Type` kind:
+				-- Type = {
+				--     highlight = "Comment",
+				--     text = function(text)
+				--         return "->" .. text:sub(2)
+				--     end,
+				-- },
+			},
+
+			-- update imports on file move
+			update_imports_on_move = false,
+			require_confirmation_on_move = false,
+			watch_dir = nil,
+		})
+
+		-- required to fix code action ranges and filter diagnostics
+		ts_utils.setup_client(client)
+
+		-- no default maps, so you may want to define some here
+		local opts = { silent = true }
+		vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", ":TSLspOrganize<CR>", opts)
+		vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", ":TSLspRenameFile<CR>", opts)
+		vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", ":TSLspImportAll<CR>", opts)
+
+		-- this is handled by null-ls and prettier
+		client.resolved_capabilities.document_formatting = false
+	end,
 })
 
 require("lspconfig").graphql.setup({
@@ -144,8 +220,8 @@ require("lspconfig").gopls.setup({
 		},
 	},
 	init_options = {
-    usePlaceholders = true,
-  },
+		usePlaceholders = true,
+	},
 	on_attach = on_attach,
 })
 
@@ -177,3 +253,5 @@ require("rust-tools").setup({
 })
 
 require("lspconfig").terraformls.setup({})
+
+require("lspconfig").prismals.setup({})
