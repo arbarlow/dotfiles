@@ -6,6 +6,8 @@ require("lsp")
 require("snip")
 require("dap-stuff")
 require("nvim-autopairs").setup({})
+require("telescope").setup({})
+-- require("telescope").load_extension("luasnip")
 
 require("nvim-tree").setup({
 	renderer = { icons = { show = {
@@ -60,5 +62,6 @@ vim.api.nvim_set_keymap("n", "<C-e>", ":NvimTreeToggle<CR>", { noremap = true })
 vim.api.nvim_set_keymap("", "<Leader>t", "<cmd>Telescope find_files<cr>", { noremap = true })
 vim.api.nvim_set_keymap("", "<Leader>fg", "<cmd>Telescope find_grep<cr>", { noremap = true })
 vim.api.nvim_set_keymap("", "<Leader>ca", ":lua require'telescope.builtin'.lsp_code_actions{}<cr>", { noremap = true })
+vim.api.nvim_set_keymap("", "<Leader>s", ":lua require'telescope'.extensions.luasnip.luasnip{}<cr>", { noremap = true })
 
 vim.api.nvim_set_keymap("", "<Leader>p", "<cmd>TroubleToggle<cr>", { noremap = true })

@@ -37,6 +37,7 @@ return require("packer").startup(function(use)
 		run = ":TSUpdate",
 	})
 	use("nvim-treesitter/playground")
+	use("windwp/nvim-ts-autotag")
 
 	use({
 		"kyazdani42/nvim-tree.lua",
@@ -72,6 +73,11 @@ return require("packer").startup(function(use)
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
 	use("theHamsta/nvim-dap-virtual-text")
 	use("folke/which-key.nvim")
+
+	use({
+		"benfowler/telescope-luasnip.nvim",
+		module = "telescope._extensions.luasnip", -- if you wish to lazy-load
+	})
 
 	use({
 		"pwntester/octo.nvim",
